@@ -386,7 +386,7 @@ class MailManager implements FactoryContract
 
         if ($logger instanceof LogManager) {
             $logger = $logger->channel(
-                $config['channel'] ?? $this->app['config']->get('mail.log_channel')
+                $config['channel'] ?? $this->app['config']->get('mail.log.channel')
             );
         }
 
