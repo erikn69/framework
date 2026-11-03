@@ -77,8 +77,19 @@ class WhoopsHandler
      */
     protected function registerEditor($handler)
     {
-        if (config('app.editor', false)) {
-            $handler->setEditor(config('app.editor'));
+        $editor = config('app.editor');
+        $options = [];
+
+        if (is_array($editor)) {
+            if (!empty($editor['base_path'])) {
+                $options['pathMappings'] = [base_path() => $editor['base_path']];
+            }
+
+            $editor = $editor['name'] ?? null;
+        }
+
+        if ($editor) {
+            $handler->setEditor($editor, $options);
         }
 
         return $this;
